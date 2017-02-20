@@ -27,6 +27,7 @@ protocol UserApi {
     //解绑银行卡
     func unbindcard( vToken :String,bid: Int32,timestamp: Int64, phone :String,vCode:String, complete: CompleteBlock?, error: ErrorBlock?)
     
+    
     //充值列表
     func creditlist(status: String, pos: Int32, count: Int32, complete: CompleteBlock?, error: ErrorBlock?)
     //充值详情
