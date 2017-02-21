@@ -32,7 +32,7 @@ class UserSocketApi: BaseSocketAPI, UserApi {
     func flowDetails(flowld: Int64, flowType: Int8, complete: CompleteBlock?, error: ErrorBlock?){
          
         let param = [SocketConst.Key.uid: UserModel.currentUserId,
-                     SocketConst.Key.token: UserModel.token ?? "",
+                     SocketConst.Key.token: UserModel.token ,
                      SocketConst.Key.flowld: flowld,
                      SocketConst.Key.flowType: flowType] as [String : Any]
         let packet: SocketDataPacket = SocketDataPacket.init(opcode: .flowDetails, dict: param as [String : AnyObject])
@@ -42,7 +42,7 @@ class UserSocketApi: BaseSocketAPI, UserApi {
     // 用户信息
     func accinfo(complete: CompleteBlock?, error: ErrorBlock?){
         let param = [SocketConst.Key.uid: UserModel.currentUserId,
-                     SocketConst.Key.token: UserModel.token ?? ""] as [String : Any]
+                     SocketConst.Key.token: UserModel.token ] as [String : Any]
         
         let packet: SocketDataPacket =  SocketDataPacket.init(opcode: .accinfo, dict: param as [String : AnyObject], type: SocketConst.type.wp)
         print(param)
