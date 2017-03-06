@@ -31,7 +31,7 @@ class FeedbackController: UIViewController {
         
         textView.autocorrectionType = .no
         textView.delegate = self
-        self.view.addSubview(textView)
+        view.addSubview(textView)
         //设置约束
         textView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view).offset(80)
