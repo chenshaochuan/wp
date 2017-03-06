@@ -32,7 +32,8 @@ class SocketConst: NSObject {
         case getUserinfo = 1001
         //修改个人信息
         case changeUserInfo = 1031
-        
+        //每天的数据
+        case everyday = 6005
         case accinfo = 1003
         //流水列表
         case flowList = 1077
@@ -90,6 +91,9 @@ class SocketConst: NSObject {
         case timeline = 4003
         //当前报价
         case realtime = 4001
+        //交易总概况
+        case totalHistroy = 6003
+        
         
     }
     enum type:UInt8 {
@@ -99,6 +103,7 @@ class SocketConst: NSObject {
         case user   = 3
         case time   = 4
         case deal   = 5
+        case operate = 6
     }
     
     enum aType:UInt8 {

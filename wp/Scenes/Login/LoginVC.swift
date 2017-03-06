@@ -34,7 +34,6 @@ class LoginVC: BaseTableViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: AppConst.NotifyDefine.UpdateUserInfo), object: nil)
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -68,7 +67,7 @@ class LoginVC: BaseTableViewController {
             let password = ((pwdText.text! + AppConst.sha256Key).sha256()+phoneText.text!).sha256()
             SVProgressHUD.showProgressMessage(ProgressMessage: "登录中...")
             
-            AppAPIHelper.commen().test(phone: phoneText.text!, pwd: password, complete: { [weak self]( result) -> ()? in
+            AppAPIHelper.login().login(phone: phoneText.text!, pwd: password, complete: { [weak self]( result) -> ()? in
                 SVProgressHUD.dismiss()
                 //存储用户信息
                 if result != nil{

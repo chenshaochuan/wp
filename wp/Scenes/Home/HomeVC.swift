@@ -124,12 +124,7 @@ class HomeVC: BaseTableViewController {
         if section == 0 {
             return marketArray.count
         }
-//        if section == 1 {
-//            return 1
-//        }
-//        if section == 2 {
-//            return 1
-//        }
+
         return 0
     }
     //MARK: --行高
@@ -137,12 +132,7 @@ class HomeVC: BaseTableViewController {
         if indexPath.section == 0 {
             return 100
         }
-//        if indexPath.section == 1 {
-//            return 155
-//        }
-//        if indexPath.section == 2 {
-//            return 106
-//        }
+
         return 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -200,6 +190,9 @@ class HomeVC: BaseTableViewController {
         notificationCenter.addObserver(self, selector: #selector(jumpToProductGradeController), name: NSNotification.Name(rawValue: AppConst.NotifyDefine.jumpToProductGrade), object: nil)
         notificationCenter.addObserver(self, selector: #selector(jumpToAttentionUsController), name: NSNotification.Name(rawValue: AppConst.NotifyDefine.jumpToAttentionUs), object: nil)
         notificationCenter.addObserver(self, selector: #selector(jumpToMyWealtVC), name: NSNotification.Name(rawValue: AppConst.NotifyDefine.jumpToMyWealtVC), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(jumpToRecharge), name: NSNotification.Name(rawValue: AppConst.NotifyDefine.jumpToRecharge), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(jumpToWithdraw), name: NSNotification.Name(rawValue: AppConst.NotifyDefine.jumpToWithdraw), object: nil)
+
     }
     //MARK: --通知方法实现
     func jumpToMyMessageController() {
@@ -207,6 +200,26 @@ class HomeVC: BaseTableViewController {
         performSegue(withIdentifier: MyMessageController.className(), sender: nil)
     }
     
+    func jumpToRecharge() {
+        
+        if checkLogin() {
+        
+            let stroyBoard = UIStoryboard(name: "Share", bundle: nil)
+            let vc = stroyBoard.instantiateViewController(withIdentifier: "RechargeVC")
+            
+            _ = navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+    func jumpToWithdraw() {
+        if checkLogin() {
+            
+            let stroyBoard = UIStoryboard(name: "Share", bundle: nil)
+            let vc = stroyBoard.instantiateViewController(withIdentifier: "WithDrawalVC")
+            _ = navigationController?.pushViewController(vc, animated: true)
+
+        }
+    }
     //我的关注
     func jumpToMyAttentionController() {
         

@@ -16,6 +16,7 @@ class YD_CountDownHelper: NSObject {
     private var isCountDown = false
     weak var table:MyDealTableView?
     private override init() {}
+    var finishBlock: CompleteBlock?
 
     func countDown() {
         let cells = table?.visibleCells as? Array<DealListCell>
@@ -23,7 +24,6 @@ class YD_CountDownHelper: NSObject {
             return
         }
         for cell in cells! {
-            cell.timeCount -= 1
             cell.refreshText()
         }
     }
@@ -60,6 +60,9 @@ class YD_CountDownHelper: NSObject {
         }
         table?.dataArray = DealModel.getAllPositionModel()
         table?.reloadData()
+        if let finish = finishBlock{
+            finish(nil)
+        }
 
     }
     func reStart() {

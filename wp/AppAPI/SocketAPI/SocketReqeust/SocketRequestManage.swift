@@ -64,9 +64,8 @@ class SocketRequestManage: NSObject {
     func notifyResponsePacket(_ packet: SocketDataPacket) {
         
         objc_sync_enter(self)
-//        print("\(packet.session_id)")
         var socketReqeust = socketRequests[packet.session_id]
-//        var socketReqeust = socketRequests[UInt64(packet.operate_code - 1)]
+
         if packet.operate_code ==  SocketConst.OPCode.timeline.rawValue + 1{
             socketReqeust = timelineRequest
         }else if packet.operate_code == SocketConst.OPCode.products.rawValue + 1{
@@ -94,7 +93,6 @@ class SocketRequestManage: NSObject {
         objc_sync_enter(self)
         for (key,reqeust) in socketRequests {
             if reqeust.isReqeustTimeout() {
-                print(">>>>>>>>>>>>>>>>>>>>>>>>\(key)")
                 socketRequests.removeValue(forKey: key)
                 reqeust.onError(-11011)
                 break
@@ -139,8 +137,8 @@ class SocketRequestManage: NSObject {
         }else if packet.operate_code == SocketConst.OPCode.realtime.rawValue{
             priceRequest = socketReqeust
         }else{
-            socketRequests[packet.session_id] = socketReqeust;
-//             socketRequests[UInt64(packet.operate_code)] = socketReqeust;
+
+            socketRequests[packet.session_id] = socketReqeust
         }
         objc_sync_exit(self)
         sendRequest(packet)
